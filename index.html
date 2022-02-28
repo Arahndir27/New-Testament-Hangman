@@ -3,14 +3,14 @@
 
 <head>
     <meta charset='UTF-8' />
+    <meta name="viewport" content="width=device=width, initial-scale=1.0, maximum-scale=1.0" />
     <title>New Testament Hangman</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 
 <body>
-    <div class="cont">
+    <div class="cont" id="hangman-game">
         <div class="top-cont">
             <div class="title">
                 New Testament Hangman
@@ -25,10 +25,12 @@
 
         <div class="bottom-cont">
             <div class="letters">
-
+                <!--vfor in a div-->
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </body>
 
 </html>
