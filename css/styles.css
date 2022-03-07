@@ -46,6 +46,14 @@ body {
     margin-top: 10px;
 }
 
+/*Letters Styles*/
+.letters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
     .title {
