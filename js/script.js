@@ -1,7 +1,8 @@
-let hangman = new Vue({
-    el: "hangman-game",
+var hangman = new Vue({
+    el: "#app",
     data: {
-        alphabet = [
+        title: "New Testament Hangman",
+        alphabet: [
             {letter: "a", display: true},
             {letter: "b", display: true},
             {letter: "c", display: true},
@@ -29,7 +30,7 @@ let hangman = new Vue({
             {letter: "y", display: true},
             {letter: "z", display: true},
         ],
-        possibleWords = [
+        possibleWords: [
             {word: "Peter", hint: ""},
             {word: "Simon", hint: ""},
             {word: "Andrew", hint: ""},
