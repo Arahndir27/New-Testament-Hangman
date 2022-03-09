@@ -67,6 +67,10 @@ body {
     background-color: rgb(251, 255, 0);
 }
 
+.hangman {
+    font-size: 3.5em;
+}
+
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
     .title {
@@ -75,6 +79,9 @@ body {
     }
     .letters {
         font-size: 1.5em;
+    }
+    .hangman {
+        font-size: 2em;
     }
 }
 
