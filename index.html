@@ -15,17 +15,20 @@
             <div class="title">
                 {{title}}
             </div>
+            <button class="button-19" role="button" @click="reset">Reset</button>
         </div>
 
         <div class="middle-cont">
             <div class="hangman">
-
+                {{wordToGuess}}
             </div>
         </div>
 
         <div class="bottom-cont">
             <div class="letters">
-                <div v-for="letter in letters">{{letter.letter}}</div>
+                <div class="letter" v-for="letter in letters" @click="guessLetter(letter)">{{letter.letter}}</div>
+                <!-- <button class="button-64" role="button" v-for="letter in letters" @click="guessLetter(letter)">
+                    <span class="text">{{letter.letter}}</span></button> -->
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    /* background-color: aqua; */
     width: 100%;
     margin-top: 10px;
 }
@@ -30,7 +30,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 174, 0);
+    /* background-color: rgb(255, 174, 0); */
     width: 100%;
     height: 450px;
     margin-top: 10px;
@@ -40,7 +40,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(132, 0, 255);
+    /* background-color: rgb(132, 0, 255); */
     width: 100%;
     height: 100px;
     margin-top: 10px;
@@ -48,16 +48,38 @@ body {
 
 /*Letters Styles*/
 .letters {
+    width: 40%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 3em;
+}
+
+.letter {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.letter:hover {
+    cursor: pointer;
+    background-color: rgb(251, 255, 0);
 }
 
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
     .title {
         display: flexbox;
+        font-size: 1.5em;
+    }
+    .letters {
+        font-size: 1.5em;
+    }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 600px) {
+    .letters {
         font-size: 1.5em;
     }
 }
@@ -77,3 +99,112 @@ body {
         font-size: 3em;
     }
 }
+
+/* Reset button, thanks https://getcssscan.com/css-buttons-examples */
+.button-19 {
+    appearance: button;
+    background-color: #d61818;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    /* font-family: din-round,sans-serif; */
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    line-height: 20px;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 13px 16px;
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: filter .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 10%;
+  }
+  
+  .button-19:after {
+    background-clip: padding-box;
+    background-color: #eb0f0f;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    bottom: -4px;
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+  
+  .button-19:main,
+  .button-19:focus {
+    user-select: auto;
+  }
+  
+  .button-19:hover:not(:disabled) {
+    filter: brightness(1.1);
+  }
+  
+  .button-19:disabled {
+    cursor: auto;
+  }
+
+/* This looks great! Thanks to https://getcssscan.com/css-buttons-examples*/
+/* .button-64 {
+  align-items: center;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  display: flex;
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  width: 40px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button-64:active,
+.button-64:hover {
+  outline: 0;
+}
+
+.button-64 span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+.button-64:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .button-64 {
+    font-size: 24px;
+    min-width: 196px;
+  }
+} */

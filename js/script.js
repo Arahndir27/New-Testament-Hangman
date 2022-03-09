@@ -1,7 +1,12 @@
 var hangman = new Vue({
+    //Only applies to the div with ID of app
     el: "#app",
     data: {
+        //Page Title
         title: "New Testament Hangman",
+        //Word to guess
+        wordToGuess: "",
+        //Array of all letters in english alphabet
         alphabet: [
             {letter: "a", display: true},
             {letter: "b", display: true},
@@ -30,6 +35,7 @@ var hangman = new Vue({
             {letter: "y", display: true},
             {letter: "z", display: true},
         ],
+        //Array of possible words for the user to guess
         possibleWords: [
             {word: "Peter", hint: ""},
             {word: "Simon", hint: ""},
@@ -74,16 +80,30 @@ var hangman = new Vue({
         ],
     },
     methods: {
+        //Resets the game; chooses new word and resets letters
         reset() {
-
+            console.log("You clicked the reset button!");
         },
-        guessLetter() {
-        
+        //Guess a letter
+        guessLetter(letter) {
+            letter.display = false;
         },
+        //Function to run on page load and choose a random word in the possibleWords array
+        chooseWord() {
+            let size = this.possibleWords.length;
+            //Choose a random index in the possibleWords array
+            let index = Math.floor(Math.random() * size);
+            this.wordToGuess = this.possibleWords[index].word;
+        }
     },
     computed: {
+        //Returns a new array of only letters that have not been guessed
         letters() {
             return this.alphabet.filter(item => { return item.display; });
         },
     },
+    //This will run on page load
+    beforeMount(){
+        this.chooseWord();
+     },
 })
