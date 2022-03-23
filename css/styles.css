@@ -1,183 +1,211 @@
 body {
-    background-color: rgb(161, 255, 161);
-    font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(161, 255, 161);
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
 }
 
 .top-cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: aqua; */
-    width: 100%;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: aqua; */
+  width: 100%;
+  margin-top: 10px;
 }
 
 .title {
-    display: flexbox;
-    font-size: 3em;
+  display: flexbox;
+  font-size: 3em;
 }
 
 .middle-cont {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    /* background-color: rgb(255, 174, 0); */
-    width: 100%;
-    height: 450px;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: rgb(255, 174, 0); */
+  width: 100%;
+  height: 450px;
+  margin-top: 10px;
 }
 
 .bottom-cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: rgb(132, 0, 255); */
-    width: 100%;
-    height: 100px;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: rgb(132, 0, 255); */
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
 }
 
 /*Letters Styles*/
 .letters {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    font-size: 3em;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  font-size: 3em;
 }
 
 .letter {
-    margin-left: 5px;
-    margin-right: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .letter:hover {
-    cursor: pointer;
-    background-color: rgb(251, 255, 0);
+  cursor: pointer;
+  background-color: rgb(251, 255, 0);
 }
 
 .hangman-word {
-    font-size: 3.5em;
-    display: flexbox;
-    margin-top: 100px;
+  font-size: 3.5em;
+  display: flexbox;
+  margin-top: 100px;
+}
+
+.lost-message {
+  font-size: 1em !important;
+}
+
+.hangman-pic-cont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+}
+
+.dummy {
+  display: flexbox;
 }
 
 .hangman-pic {
-  font-size: 3.5em;
+  display: flexbox;
+}
+
+.guesses-left {
+  font-size: 1.5em;
   display: flexbox;
   margin-bottom: 100px;
 }
 
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
-    .title {
-        display: flexbox;
-        font-size: 1.5em;
-    }
-    .letters {
-        font-size: 1.5em;
-    }
-    .hangman-word {
-        font-size: 2em;
-    }
-    .hangman-pic {
-      font-size: 1.5em;
-    }
+  .title {
+    display: flexbox;
+    font-size: 1.5em;
+  }
+
+  .letters {
+    font-size: 1.5em;
+  }
+
+  .hangman-word {
+    font-size: 2em;
+  }
+
+  .lost-message {
+    font-size: 1em !important;
+  }
+
+  .guesses-left {
+    font-size: 1em;
+  }
 }
 
 @media only screen and (min-width: 401px) and (max-width: 600px) {
-    .letters {
-        font-size: 1.5em;
-    }
+  .letters {
+    font-size: 1.5em;
+  }
 }
 
 /* Tablet Styles */
 @media only screen and (min-width: 401px) and (max-width: 960px) {
-    .title {
-        display: flexbox;
-        font-size: 3em;
-    }
+  .title {
+    display: flexbox;
+    font-size: 3em;
+  }
 }
 
 /* Desktop Styles */
 @media only screen and (min-width: 961px) {
-    .title {
-        display: flexbox;
-        font-size: 3em;
-    }
+  .title {
+    display: flexbox;
+    font-size: 3em;
+  }
 }
 
 /* Reset button, thanks https://getcssscan.com/css-buttons-examples */
 .button-19 {
-    appearance: button;
-    background-color: #d61818;
-    border: solid transparent;
-    border-radius: 16px;
-    border-width: 0 0 4px;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    /* font-family: din-round,sans-serif; */
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .8px;
-    line-height: 20px;
-    margin: 0;
-    outline: none;
-    overflow: visible;
-    padding: 13px 16px;
-    text-align: center;
-    text-transform: uppercase;
-    touch-action: manipulation;
-    transform: translateZ(0);
-    transition: filter .2s;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    width: 10%;
-  }
-  
-  .button-19:after {
-    background-clip: padding-box;
-    background-color: #eb0f0f;
-    border: solid transparent;
-    border-radius: 16px;
-    border-width: 0 0 4px;
-    bottom: -4px;
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
-  }
-  
-  .button-19:main,
-  .button-19:focus {
-    user-select: auto;
-  }
-  
-  .button-19:hover:not(:disabled) {
-    filter: brightness(1.1);
-  }
-  
-  .button-19:disabled {
-    cursor: auto;
-  }
+  appearance: button;
+  background-color: #d61818;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Courier New', Courier, monospace !important;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 10%;
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #eb0f0f;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+}
 
 /* This looks great! Thanks to https://getcssscan.com/css-buttons-examples*/
 /* .button-64 {

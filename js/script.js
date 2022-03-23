@@ -6,7 +6,9 @@ var hangman = new Vue({
         title: "New Testament Hangman",
         //Word to guess
         wordToGuess: "",
-        //Number of guesses the user has left
+        lettersInWord: new Set(),
+        displayWord: "",
+        userLost: false,
         guessesLeft: 7,
         //Array of all letters in english alphabet
         alphabet: [
@@ -81,15 +83,85 @@ var hangman = new Vue({
             { word: "Hermeneutics", hint: "" },
         ],
     },
+    //TODO: possibly put guesses left above letters instead of to right
     methods: {
         //Resets the game; chooses new word and resets letters
         reset() {
             console.log("You clicked the reset button!");
+            this.guessesLeft = 7;
+            //TODO: Make reset work
+            for (letter in this.alphabet) {
+                letter.display = true;
+            }
             this.chooseWord();
+            this.formatDisplayWord();
         },
         //Guess a letter
         guessLetter(letter) {
+            //Set that letter as guessed
             letter.display = false;
+
+            //Decrement number of guesses left
+            if (!this.lettersInWord.has(letter.letter)) {
+                //Wrong guess!
+                --this.guessesLeft;
+                if (this.guessesLeft === 0) {
+                    this.userLost = true;
+                }
+
+                //TODO: display hangman part on wrong guess
+            }
+
+            //Format the display word
+            this.formatDisplayWord();
+        },
+        formatDisplayWord() {
+            let displayWordBuilder = "";
+            let temp = this.wordToGuess;
+
+            for (let i = 0; i < this.wordToGuess.length; ++i) {
+                //Get the first char of wordToGuess
+                let myChar = temp.charAt(0);
+
+                //TODO: Make guessing work with upper and lower case;
+                //Check if it is uppercase
+                let addChar = myChar;
+                let wasUpper = false;
+                if (myChar == myChar.toUpperCase()) {
+                    //So that there are no issues with array finding
+                    myChar = myChar.toLowerCase();
+                    wasUpper = true;
+                }
+
+                //Check if the char is a letter
+                if (myChar.match(/[a-z]/i) != null) { //match returns an array of results; null means none found
+                    //If so, see if that letter has been guessed
+                    //Make a temp letter object to search for it
+                    if (this.guessedLetters.indexOf(myChar) != -1) {
+                        //That letter has been guessed so display it
+                        //But first check if it should be uppercase
+                        if (wasUpper) {
+                            displayWordBuilder += myChar.toUpperCase();
+                        }
+                        else {
+                            displayWordBuilder += myChar;
+                        }
+                    }
+                    else {
+                        //Else add a dash to displayWord
+                        displayWordBuilder += "-";
+                    }
+                }
+                else {
+                    displayWordBuilder += myChar;
+                }
+                //Remove first char from temp
+                temp = temp.substring(1);
+            }
+            this.displayWord = displayWordBuilder;
+        },
+        showHangmanPiece() {
+
         },
         //Function to run on page load and choose a random word in the possibleWords array
         chooseWord() {
@@ -97,6 +169,20 @@ var hangman = new Vue({
             //Choose a random index in the possibleWords array
             let index = Math.floor(Math.random() * size);
             this.wordToGuess = this.possibleWords[index].word;
+            
+            //Add letters in word to set
+            this.createLetterSet();
+        },
+        createLetterSet() {
+            //Add letters in word to set
+            let temp = this.wordToGuess;
+            for (let i = 0; i < this.wordToGuess.length; ++i) {
+                let myChar = temp.charAt(i);
+                //Only add letters to the set
+                if (myChar.match(/[a-z]/i) != null) {
+                    this.lettersInWord.add(myChar.toLowerCase());
+                }
+            }
         }
     },
     computed: {
@@ -114,47 +200,60 @@ var hangman = new Vue({
             }
             return guessedLetters;
         },
-        displayWord() {
-            let displayWord = "";
-            let temp = this.wordToGuess;
+        //displayWord() {
+        // let displayWord = "";
+        // let temp = this.wordToGuess;
 
-            for (let i = 0; i < this.wordToGuess.length; ++i) {
-                //Get the first char of wordToGuess
-                let myChar = temp.charAt(0);
+        // for (let i = 0; i < this.wordToGuess.length; ++i) {
+        //     //Get the first char of wordToGuess
+        //     let myChar = temp.charAt(0);
 
-                //TODO: Make guessing work with upper and lower case;
-                //Check if it is uppercase
-                let addChar = myChar;
-                if (myChar == myChar.toUpperCase()) {
-                    //So that there are no issues with array finding
-                    myChar = myChar.toLowerCase();
-                }
+        //     //TODO: Make guessing work with upper and lower case;
+        //     //Check if it is uppercase
+        //     let addChar = myChar;
+        //     let wasUpper = false;
+        //     if (myChar == myChar.toUpperCase()) {
+        //         //So that there are no issues with array finding
+        //         myChar = myChar.toLowerCase();
+        //         wasUpper = true;
+        //     }
 
-
-                //Check if the char is a letter
-                if (myChar.match(/[a-z]/i) != null) { //match returns an array of results; null means none found
-                    //If so, see if that letter has been guessed
-                    //Make a temp letter object to search for it
-                    if (this.guessedLetters.indexOf(myChar) != -1) {
-                        //That letter has been guessed so display it
-                        displayWord += myChar;
-                    }
-                    else {
-                        //Else add a dash to displayWord
-                        displayWord += "-";
-                    }
-                }
-                else {
-                    displayWord += myChar;
-                }
-                //Remove first char from temp
-                temp = temp.substring(1);
-            }
-            return displayWord;
-        },
+        //     //Check if the char is a letter
+        //     if (myChar.match(/[a-z]/i) != null) { //match returns an array of results; null means none found
+        //         //If so, see if that letter has been guessed
+        //         //Make a temp letter object to search for it
+        //         if (this.guessedLetters.indexOf(myChar) != -1) {
+        //             //That letter has been guessed so display it
+        //             //But first check if it should be uppercase
+        //             if (wasUpper) {
+        //                 displayWord += myChar.toUpperCase();
+        //             }
+        //             else {
+        //                 displayWord += myChar;
+        //             }
+        //         }
+        //         else {
+        //             //Else add a dash to displayWord
+        //             displayWord += "-";
+        //             //Decrement number of guesses left
+        //             if (this.guessedLetters.length != 0) {
+        //                 --this.guessesLeft;
+        //             }
+        //             //TODO: display hangman part on wrong guess
+        //         }
+        //     }
+        //     else {
+        //         displayWord += myChar;
+        //     }
+        //     //Remove first char from temp
+        //     temp = temp.substring(1);
+        // }
+        // return displayWord;
+        //},
     },
     //This will run on page load
     beforeMount() {
         this.chooseWord();
+        this.formatDisplayWord();
     },
 })
