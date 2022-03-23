@@ -6,6 +6,8 @@ var hangman = new Vue({
         title: "New Testament Hangman",
         //Word to guess
         wordToGuess: "",
+        //Number of guesses the user has left
+        guessesLeft: 7,
         //Array of all letters in english alphabet
         alphabet: [
             { letter: "a", display: true },
@@ -83,6 +85,7 @@ var hangman = new Vue({
         //Resets the game; chooses new word and resets letters
         reset() {
             console.log("You clicked the reset button!");
+            this.chooseWord();
         },
         //Guess a letter
         guessLetter(letter) {
