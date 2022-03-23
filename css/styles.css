@@ -69,19 +69,23 @@ body {
 }
 
 .hangman-word {
-  font-size: 3.5em;
   display: flexbox;
   margin-top: 100px;
 }
 
+.word-to-guess {
+  font-size: 3.5em;
+}
+
 .lost-message {
-  font-size: 1em !important;
+  font-size: 2em !important;
+  margin-bottom: 20px;
 }
 
 .hangman-pic-cont {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 100px;
@@ -93,6 +97,11 @@ body {
 
 .hangman-pic {
   display: flexbox;
+}
+
+.hangman-pic img {
+  height: 300px;
+  width: 100%;
 }
 
 .guesses-left {
@@ -112,7 +121,7 @@ body {
     font-size: 1.5em;
   }
 
-  .hangman-word {
+  .word-to-guess {
     font-size: 2em;
   }
 

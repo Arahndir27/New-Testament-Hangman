@@ -88,11 +88,16 @@ var hangman = new Vue({
         //Resets the game; chooses new word and resets letters
         reset() {
             console.log("You clicked the reset button!");
+            //Reset initial values
+            this.userLost = false;
             this.guessesLeft = 7;
-            //TODO: Make reset work
-            for (letter in this.alphabet) {
-                letter.display = true;
+
+            //Reset which letters should appear
+            for (let i = 0; i < this.alphabet.length; ++i) {
+                this.alphabet[i].display = true;
             }
+
+            //Choose a new word
             this.chooseWord();
             this.formatDisplayWord();
         },
