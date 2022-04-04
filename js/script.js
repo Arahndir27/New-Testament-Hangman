@@ -9,6 +9,7 @@ var hangman = new Vue({
         lettersInWord: new Set(),
         displayWord: "",
         userLost: false,
+        userWon: false,
         guessesLeft: 7,
         //Array of all letters in english alphabet
         alphabet: [
@@ -41,46 +42,46 @@ var hangman = new Vue({
         ],
         //Array of possible words for the user to guess
         possibleWords: [
-            { word: "Peter", hint: "" },
-            { word: "Simon", hint: "" },
-            { word: "Andrew", hint: "" },
-            { word: "James", hint: "" },
-            { word: "Zebedee", hint: "" },
-            { word: "John", hint: "" },
-            { word: "Philip", hint: "" },
-            { word: "Bartholomew", hint: "" },
-            { word: "Thomas", hint: "" },
-            { word: "Matthew", hint: "" },
-            { word: "James son of Alphaeus", hint: "" },
-            { word: "Thaddaeus", hint: "" },
-            { word: "Simon the Canaanite", hint: "" },
-            { word: "Judas Iscariot", hint: "" },
-            { word: "Apostle", hint: "" },
-            { word: "Mark", hint: "" },
-            { word: "Luke", hint: "" },
-            { word: "The Acts of the Apostles", hint: "" },
-            { word: "Pharisee", hint: "" },
-            { word: "Sadducee", hint: "" },
-            { word: "Temple", hint: "" },
-            { word: "New Testament", hint: "" },
-            { word: "Messiah", hint: "" },
-            { word: "Jesus of Nazareth", hint: "" },
-            { word: "Jerusalem", hint: "" },
-            { word: "Mary", hint: "" },
-            { word: "Joseph", hint: "" },
-            { word: "Stable", hint: "" },
-            { word: "Bethlehem", hint: "" },
-            { word: "Galilee", hint: "" },
-            { word: "Capernaum", hint: "" },
-            { word: "Samaria", hint: "" },
-            { word: "Widow of Nain", hint: "" },
-            { word: "Mary Magdalene", hint: "" },
-            { word: "Martha", hint: "" },
-            { word: "He is Risen", hint: "" },
-            { word: "Golgotha", hint: "" },
-            { word: "Exegesis", hint: "" },
-            { word: "Eisegesis", hint: "" },
-            { word: "Hermeneutics", hint: "" },
+            { word: "Peter", hint: "", used: false },
+            { word: "Simon", hint: "", used: false },
+            { word: "Andrew", hint: "", used: false },
+            { word: "James", hint: "", used: false },
+            { word: "Zebedee", hint: "", used: false },
+            { word: "John", hint: "", used: false },
+            { word: "Philip", hint: "", used: false },
+            { word: "Bartholomew", hint: "", used: false },
+            { word: "Thomas", hint: "", used: false },
+            { word: "Matthew", hint: "", used: false },
+            { word: "James son of Alphaeus", hint: "", used: false },
+            { word: "Thaddaeus", hint: "", used: false },
+            { word: "Simon the Canaanite", hint: "", used: false },
+            { word: "Judas Iscariot", hint: "", used: false },
+            { word: "Apostle", hint: "", used: false },
+            { word: "Mark", hint: "", used: false },
+            { word: "Luke", hint: "", used: false },
+            { word: "The Acts of the Apostles", hint: "", used: false },
+            { word: "Pharisee", hint: "", used: false },
+            { word: "Sadducee", hint: "", used: false },
+            { word: "Temple", hint: "", used: false },
+            { word: "New Testament", hint: "", used: false },
+            { word: "Messiah", hint: "", used: false },
+            { word: "Jesus of Nazareth", hint: "", used: false },
+            { word: "Jerusalem", hint: "", used: false },
+            { word: "Mary", hint: "", used: false },
+            { word: "Joseph", hint: "", used: false },
+            { word: "Stable", hint: "", used: false },
+            { word: "Bethlehem", hint: "", used: false },
+            { word: "Galilee", hint: "", used: false },
+            { word: "Capernaum", hint: "", used: false },
+            { word: "Samaria", hint: "", used: false },
+            { word: "Widow of Nain", hint: "", used: false },
+            { word: "Mary Magdalene", hint: "", used: false },
+            { word: "Martha", hint: "", used: false },
+            { word: "He is Risen", hint: "", used: false },
+            { word: "Golgotha", hint: "", used: false },
+            { word: "Exegesis", hint: "", used: false },
+            { word: "Eisegesis", hint: "", used: false },
+            { word: "Hermeneutics", hint: "", used: false },
         ],
     },
     //TODO: possibly put guesses left above letters instead of to right
@@ -90,6 +91,7 @@ var hangman = new Vue({
             console.log("You clicked the reset button!");
             //Reset initial values
             this.userLost = false;
+            this.userWon = false;
             this.guessesLeft = 7;
 
             //Reset which letters should appear
@@ -164,16 +166,33 @@ var hangman = new Vue({
                 temp = temp.substring(1);
             }
             this.displayWord = displayWordBuilder;
+
+            //Check and see if the user guessed the whole word
+            if ((this.guessesLeft > 0) && (this.displayWord === this.wordToGuess)) {
+                //The user wins!
+                this.userWon = true;
+            }
         },
         showHangmanPiece() {
 
         },
-        //Function to run on page load and choose a random word in the possibleWords array
+        //Function to run on page load and choose a random word in the unusedWords array
         chooseWord() {
-            let size = this.possibleWords.length;
-            //Choose a random index in the possibleWords array
+            //Check if I need to reset the possibleWords array
+            if (this.unusedWords.length === 0) {
+                for (word in this.possibleWords) {
+                    word.used = false;
+                }
+            }
+
+            let size = this.unusedWords.length;
+            //Choose a random index in the unusedWords array
             let index = Math.floor(Math.random() * size);
-            this.wordToGuess = this.possibleWords[index].word;
+            this.wordToGuess = this.unusedWords[index].word;
+
+            //Mark that word as used
+            let indexToMark = this.possibleWords.findIndex(word => word = this.wordToGuess);
+            this.possibleWords[indexToMark].used = true;
             
             //Add letters in word to set
             this.createLetterSet();
@@ -205,6 +224,9 @@ var hangman = new Vue({
             }
             return guessedLetters;
         },
+        unusedWords() {
+            return this.possibleWords.filter(item => { return !item.used; });
+        }
         //displayWord() {
         // let displayWord = "";
         // let temp = this.wordToGuess;

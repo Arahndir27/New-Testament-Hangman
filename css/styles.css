@@ -110,6 +110,22 @@ body {
   margin-bottom: 100px;
 }
 
+.win-message {
+  font-size: 1.5em;
+  font-style: bold;
+  margin-top: 20px;
+  color:rgb(89, 0, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.reset-msg {
+  color: red !important;
+}
+
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
   .title {

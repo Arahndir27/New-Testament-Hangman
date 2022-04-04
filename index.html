@@ -19,6 +19,14 @@
         </div>
 
         <div class="middle-cont">
+            <div class="win-message" v-if="userWon">
+                <p><strong>Congratulations! You guessed the word correctly!</strong></p>
+                <p><strong>Want to play again? Click the </strong>
+                    <span class="reset-msg">
+                        <strong>Reset Button!</strong>
+                    </span>
+                </p>
+            </div>
             <div class="hangman-word word-to-guess" v-if="!userLost">
                 {{displayWord}}
             </div>
@@ -32,8 +40,7 @@
                     temp stuff
                 </div>
                 <div class="hangman-pic">
-                    <img src="https://mixgame.net/wp-content/uploads/2022/02/Stickman-Hook.jpg"
-                        alt="stickman" />
+                    <img src="https://mixgame.net/wp-content/uploads/2022/02/Stickman-Hook.jpg" alt="stickman" />
                 </div>
                 <div class="guesses-left">
                     Guesses Remaining: {{guessesLeft}}
