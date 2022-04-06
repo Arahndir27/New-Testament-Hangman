@@ -11,6 +11,10 @@ var hangman = new Vue({
         userLost: false,
         userWon: false,
         guessesLeft: 7,
+        //These are for showing the stickman
+        myStickman: '',
+        context: '',
+
         //Array of all letters in english alphabet
         alphabet: [
             { letter: "a", display: true },
@@ -173,8 +177,52 @@ var hangman = new Vue({
                 this.userWon = true;
             }
         },
+        setUpCanvas() {
+            this.myStickman = document.getElementById("canvas");
+            this.context = this.myStickman.getContext('2d');
+            this.context.beginPath();
+            this.context.strokeStyle = "#fff";
+            this.context.lineWidth = 2;
+        },
         showHangmanPiece() {
 
+        },
+        draw(pathFromX, pathFromY, pathToX, pathToY) {
+            this.context.moveTo(pathFromX, pathFromY);
+            this.context.lineTo(pathToX, pathToY);
+            this.context.stroke();
+        },
+        drawFrameBase() {
+            this.draw(0, 150, 150, 150);
+        },
+        drawFrameShaft() {
+            this.draw(10, 0, 10, 600);
+        },
+        drawFrameBranch() {
+            this.draw(0, 5, 70, 5);
+        },
+        drawFrameTick() {
+            this.draw(60, 5, 60, 15);
+        },
+        drawHead() {
+            this.context.beginPath();
+            this.context.arc(60, 25, 10, 0, Math.PI * 2, true);
+            this.context.stroke();
+        },
+        drawTorso() {
+            this.draw(60, 36, 60, 70);
+        },
+        drawRightArm() {
+            this.draw(60, 46, 100, 50);
+        },
+        drawLeftArm() {
+            this.draw(60, 46, 20, 50);
+        },
+        drawRightLeg() {
+            this.draw(60, 70, 100, 100);
+        },
+        drawLeftLeg() {
+            this.draw(60, 70, 20, 100);
         },
         //Function to run on page load and choose a random word in the unusedWords array
         chooseWord() {
@@ -193,9 +241,15 @@ var hangman = new Vue({
             //Mark that word as used
             let indexToMark = this.possibleWords.findIndex(word => word = this.wordToGuess);
             this.possibleWords[indexToMark].used = true;
-            
+
             //Add letters in word to set
             this.createLetterSet();
+
+            //Draw Hangman Frame
+            this.drawFrameBase();
+            this.drawFrameShaft();
+            this.drawFrameShaft();
+            this.drawFrameTick();
         },
         createLetterSet() {
             //Add letters in word to set
@@ -227,60 +281,11 @@ var hangman = new Vue({
         unusedWords() {
             return this.possibleWords.filter(item => { return !item.used; });
         }
-        //displayWord() {
-        // let displayWord = "";
-        // let temp = this.wordToGuess;
-
-        // for (let i = 0; i < this.wordToGuess.length; ++i) {
-        //     //Get the first char of wordToGuess
-        //     let myChar = temp.charAt(0);
-
-        //     //TODO: Make guessing work with upper and lower case;
-        //     //Check if it is uppercase
-        //     let addChar = myChar;
-        //     let wasUpper = false;
-        //     if (myChar == myChar.toUpperCase()) {
-        //         //So that there are no issues with array finding
-        //         myChar = myChar.toLowerCase();
-        //         wasUpper = true;
-        //     }
-
-        //     //Check if the char is a letter
-        //     if (myChar.match(/[a-z]/i) != null) { //match returns an array of results; null means none found
-        //         //If so, see if that letter has been guessed
-        //         //Make a temp letter object to search for it
-        //         if (this.guessedLetters.indexOf(myChar) != -1) {
-        //             //That letter has been guessed so display it
-        //             //But first check if it should be uppercase
-        //             if (wasUpper) {
-        //                 displayWord += myChar.toUpperCase();
-        //             }
-        //             else {
-        //                 displayWord += myChar;
-        //             }
-        //         }
-        //         else {
-        //             //Else add a dash to displayWord
-        //             displayWord += "-";
-        //             //Decrement number of guesses left
-        //             if (this.guessedLetters.length != 0) {
-        //                 --this.guessesLeft;
-        //             }
-        //             //TODO: display hangman part on wrong guess
-        //         }
-        //     }
-        //     else {
-        //         displayWord += myChar;
-        //     }
-        //     //Remove first char from temp
-        //     temp = temp.substring(1);
-        // }
-        // return displayWord;
-        //},
     },
     //This will run on page load
     beforeMount() {
         this.chooseWord();
         this.formatDisplayWord();
+        this.setUpCanvas();
     },
 })

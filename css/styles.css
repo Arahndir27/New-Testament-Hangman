@@ -1,5 +1,7 @@
 body {
-  background-color: rgb(161, 255, 161);
+  /* background-color: rgb(161, 255, 161); */
+  background-color: rgb(0, 0, 0);
+  color: #e8b923;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -14,11 +16,19 @@ body {
 
 .top-cont {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   /* background-color: aqua; */
   width: 100%;
   margin-top: 10px;
+  flex-wrap: wrap;
+  /* margin-right: 10px;
+  margin-left: 10px; */
+}
+
+hr {
+  width:50%;
+  border-top: 2px solid #e8b923;
 }
 
 .title {
@@ -47,9 +57,13 @@ body {
   margin-top: 10px;
 }
 
+.secret {
+  color: rgb(0, 0, 0);
+}
+
 /*Letters Styles*/
 .letters {
-  width: 40%;
+  width: 75%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,16 +75,18 @@ body {
 .letter {
   margin-left: 5px;
   margin-right: 5px;
+  border-radius: 25px;
+  padding: 2px;
 }
 
 .letter:hover {
   cursor: pointer;
-  background-color: rgb(251, 255, 0);
+  background-color: rgb(0, 38, 255);
 }
 
 .hangman-word {
   display: flexbox;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .word-to-guess {
@@ -88,7 +104,12 @@ body {
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
+}
+
+#canvas {
+  color: #e8b923;
+  border: dashed 2px #e8b923; 
 }
 
 .dummy {
@@ -114,7 +135,7 @@ body {
   font-size: 1.5em;
   font-style: bold;
   margin-top: 20px;
-  color:rgb(89, 0, 255);
+  color: rgb(119, 0, 255);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,6 +168,10 @@ body {
 
   .guesses-left {
     font-size: 1em;
+  }
+
+  .button-19 {
+    height: 40px;
   }
 }
 
@@ -201,7 +226,7 @@ body {
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 10%;
+  width: 100px;
 }
 
 .button-19:after {
