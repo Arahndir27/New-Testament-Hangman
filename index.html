@@ -11,17 +11,17 @@
 
 <body>
     <div class="cont" id="app">
-        <hr/>
         <div class="top-cont">
             <div class="secret">Secret Message</div>
             <div class="secret">Secret Message</div>
             <div class="title">
+                <hr/>
                 {{title}}
+                <hr/>
             </div>
             <button class="button-19" role="button" @click="reset">Reset</button>
             <div class="secret">Secret Message</div>
         </div>
-        <hr/>
 
         <div class="middle-cont">
             <div class="win-message" v-if="userWon">
@@ -45,7 +45,7 @@
                     Guesses Remaining: {{guessesLeft}}
                 </div>
                 <div class="hangman-pic">
-                    <canvas id="canvas">This Text will show if the Browser does NOT support HTML5 Canvas tag</canvas>
+                    <img class="stickman" :src="imagePath" alt="Stickman picture"/>
                 </div>
                 <div class="guesses-left">
                     Guesses Remaining: {{guessesLeft}}

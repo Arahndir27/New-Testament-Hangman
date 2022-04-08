@@ -11,9 +11,10 @@ var hangman = new Vue({
         userLost: false,
         userWon: false,
         guessesLeft: 7,
+        imagePath: "/images/hangman-blank.png",
         //These are for showing the stickman
-        myStickman: '',
-        context: '',
+        // myStickman: '',
+        // context: null,
 
         //Array of all letters in english alphabet
         alphabet: [
@@ -97,6 +98,7 @@ var hangman = new Vue({
             this.userLost = false;
             this.userWon = false;
             this.guessesLeft = 7;
+            this.imagePath = "/images/hangman-blank.png";
 
             //Reset which letters should appear
             for (let i = 0; i < this.alphabet.length; ++i) {
@@ -120,7 +122,8 @@ var hangman = new Vue({
                     this.userLost = true;
                 }
 
-                //TODO: display hangman part on wrong guess
+                //Display hangman part on wrong guess
+                this.showHangmanPiece();
             }
 
             //Format the display word
@@ -134,9 +137,7 @@ var hangman = new Vue({
                 //Get the first char of wordToGuess
                 let myChar = temp.charAt(0);
 
-                //TODO: Make guessing work with upper and lower case;
                 //Check if it is uppercase
-                let addChar = myChar;
                 let wasUpper = false;
                 if (myChar == myChar.toUpperCase()) {
                     //So that there are no issues with array finding
@@ -177,52 +178,30 @@ var hangman = new Vue({
                 this.userWon = true;
             }
         },
-        setUpCanvas() {
-            this.myStickman = document.getElementById("canvas");
-            this.context = this.myStickman.getContext('2d');
-            this.context.beginPath();
-            this.context.strokeStyle = "#fff";
-            this.context.lineWidth = 2;
-        },
         showHangmanPiece() {
-
-        },
-        draw(pathFromX, pathFromY, pathToX, pathToY) {
-            this.context.moveTo(pathFromX, pathFromY);
-            this.context.lineTo(pathToX, pathToY);
-            this.context.stroke();
-        },
-        drawFrameBase() {
-            this.draw(0, 150, 150, 150);
-        },
-        drawFrameShaft() {
-            this.draw(10, 0, 10, 600);
-        },
-        drawFrameBranch() {
-            this.draw(0, 5, 70, 5);
-        },
-        drawFrameTick() {
-            this.draw(60, 5, 60, 15);
-        },
-        drawHead() {
-            this.context.beginPath();
-            this.context.arc(60, 25, 10, 0, Math.PI * 2, true);
-            this.context.stroke();
-        },
-        drawTorso() {
-            this.draw(60, 36, 60, 70);
-        },
-        drawRightArm() {
-            this.draw(60, 46, 100, 50);
-        },
-        drawLeftArm() {
-            this.draw(60, 46, 20, 50);
-        },
-        drawRightLeg() {
-            this.draw(60, 70, 100, 100);
-        },
-        drawLeftLeg() {
-            this.draw(60, 70, 20, 100);
+            switch (this.guessesLeft) {
+                case 6:
+                    this.imagePath = "/images/hangman-0.png";
+                    break;
+                case 5:
+                    this.imagePath = "/images/hangman-1.png";
+                    break;
+                case 4:
+                    this.imagePath = "/images/hangman-2.png";
+                    break;
+                case 3:
+                    this.imagePath = "/images/hangman-3.png";
+                    break;
+                case 2:
+                    this.imagePath = "/images/hangman-4.png";
+                    break;
+                case 1:
+                    this.imagePath = "/images/hangman-5.png";
+                    break;
+                case 0:
+                    this.imagePath = "/images/hangman-6.png";
+                    break;
+            }
         },
         //Function to run on page load and choose a random word in the unusedWords array
         chooseWord() {
@@ -244,12 +223,6 @@ var hangman = new Vue({
 
             //Add letters in word to set
             this.createLetterSet();
-
-            //Draw Hangman Frame
-            this.drawFrameBase();
-            this.drawFrameShaft();
-            this.drawFrameShaft();
-            this.drawFrameTick();
         },
         createLetterSet() {
             //Add letters in word to set
@@ -286,6 +259,5 @@ var hangman = new Vue({
     beforeMount() {
         this.chooseWord();
         this.formatDisplayWord();
-        this.setUpCanvas();
     },
 })
