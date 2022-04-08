@@ -70,7 +70,7 @@ hr {
   padding: 2px;
 }
 
-.letter:hover {
+body.hasHover .letter:hover {
   cursor: pointer;
   background-color: rgb(0, 38, 255);
 }
@@ -140,7 +140,7 @@ hr {
   }
 
   .letters {
-    font-size: 1.5em;
+    font-size: 1.8em;
   }
 
   .word-to-guess {
