@@ -38,26 +38,24 @@
             <div class="hangman-word" v-else>
                 <span class="lost-message">Sorry, you lost! The word was:</span><br />
                 <span class="word-to-guess">{{wordToGuess}}</span>
+                <p class="lost-message">Want to play again? Click the Reset Button!</p>
             </div>
 
             <div class="hangman-pic-cont">
-                <div class="guesses-left secret">
+                <div class="guesses-left secret" id="small">
                     Guesses Remaining: {{guessesLeft}}
                 </div>
                 <div class="hangman-pic">
                     <img class="stickman" :src="imagePath" alt="Stickman picture"/>
                 </div>
-                <div class="guesses-left">
+                <div class="guesses-left" id="smallHide">
                     Guesses Remaining: {{guessesLeft}}
                 </div>
             </div>
         </div>
-        <!-- TODO: possibly put guessesLeft above letters instead of to right -->
         <div class="bottom-cont">
             <div class="letters">
-                <div class="letter" v-for="letter in letters" @click="guessLetter(letter)">{{letter.letter}}</div>
-                <!-- <button class="button-64" role="button" v-for="letter in letters" @click="guessLetter(letter)">
-                    <span class="text">{{letter.letter}}</span></button> -->
+                <div class="letter" v-if="!userWon && !userLost" v-for="letter in letters" @click="guessLetter(letter)">{{letter.letter}}</div>
             </div>
         </div>
     </div>

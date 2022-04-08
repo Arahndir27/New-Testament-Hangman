@@ -12,9 +12,6 @@ var hangman = new Vue({
         userWon: false,
         guessesLeft: 7,
         imagePath: "/images/hangman-blank.png",
-        //These are for showing the stickman
-        // myStickman: '',
-        // context: null,
 
         //Array of all letters in english alphabet
         alphabet: [
