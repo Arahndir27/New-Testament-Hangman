@@ -232,6 +232,7 @@ var hangman = new Vue({
                 }
             }
         },
+        //This function is so that no hover effects occur on a mobile screen
         watchForHover() {
             // lastTouchTime is used for ignoring emulated mousemove events
             // that are fired after touchstart events. Since they're

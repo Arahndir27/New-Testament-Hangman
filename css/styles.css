@@ -168,7 +168,7 @@ body.hasHover .letter:hover {
   } */
 }
 
-/* Mobile Styles */
+/* Mobile Styles Gratefully this works for moblie */
 @media only screen and (max-width: 850px) {
   #small {
     color: #e8b923
